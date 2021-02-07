@@ -70,6 +70,7 @@ section {
     border-color: yellow;
     color: rgb(172, 172, 55);
 
+    &:hover,
     &:focus {
         background-color:yellow;
         color: rgb(87, 87, 66);

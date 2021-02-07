@@ -1,3 +1,14 @@
 <h1>Hello World</h1>
 
 <app-landing-page></app-landing-page>
+
+
+<button (click)="toggleState()">
+    Toggle State
+</button>
+
+<p>Obtaining the CSS classes from the component method:</p>
+
+<button [ngClass]="calculateClasses()" (click)="submit()">
+    Button
+</button>
