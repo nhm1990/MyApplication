@@ -7,22 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'MyApplication';
-
-  stateFlag = false;
-
-    toggleState() {
-        this.stateFlag = !this.stateFlag;
-    }
-
-    submit() {
-        console.log('Button submitted');
-    }
-
-    calculateClasses() {
-        return {
-            btn: true,
-            'btn-primary': true,
-            'btn-extra-class': this.stateFlag
-        };
-    }
 }

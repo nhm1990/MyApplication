@@ -1,0 +1,26 @@
+<p>landing-page works!</p>
+
+<form>
+    <section>
+        <table class="documentTable">
+            <tbody>
+                <tr *ngFor="let document of documentList">
+                    <td>
+                        <button type="button" class={{document.cssClass}}>
+                            <div style="text-align: left;">
+                                <div style="display: inline-block; text-align: center;">
+                                    <img src={{document.imgPath}} height="50" length="50">
+                                    {{ document.name }}
+                                </div>
+                            </div>
+                        </button> 
+                    </td>   
+                </tr>
+                <tr>
+                    <input type="button" value="Download" class="downloadButton">
+                    <label>Please select the attachments you want to download</label>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</form>

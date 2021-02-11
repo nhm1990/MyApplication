@@ -1,0 +1,98 @@
+section {
+    background:lightsteelblue;
+    color: black;
+    padding: 1em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.btn {
+    border: 2px solid black;
+    border-radius: 4px;
+    background-color: white;
+    color: black;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 400px;
+    height: 90px;
+}
+
+.documentTable{
+    border-spacing: 5px 1em;
+}
+
+.green {
+    border-color: #4CAF50;
+    color: #4CAF50;
+
+    &:hover,
+    &:focus {
+        background-color: #4CAF50;
+        color: rgb(1, 85, 1);
+    }
+    
+    &:active {
+        top: .08em;
+    }
+}
+
+.red {
+    border-color: rgb(190, 86, 86);
+    color: rgb(190, 86, 86);
+
+    &:hover,
+    &:focus {
+        background-color:  rgb(190, 86, 86);
+        color:  rgb(100, 5, 5);
+    }
+    
+    &:active {
+        top: .08em;
+    }
+}
+
+.blue {
+    border-color: rgb(62, 62, 253);
+    color: rgb(62, 62, 253);
+
+    &:hover,
+    &:focus {
+        background-color:  rgb(62, 62, 253);
+        color: rgb(171, 171, 233);
+    }
+    
+    &:active {
+        top: .08em;
+    }
+}
+
+.yellow {
+    border-color: yellow;
+    color: rgb(172, 172, 55);
+
+    &:hover,
+    &:focus {
+        background-color:yellow;
+        color: rgb(87, 87, 66);
+    }
+    
+    &:active {
+        top: .08em;
+    }
+}
+
+.downloadButton{
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}

@@ -1,42 +1,72 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  // ...
+} from '@angular/animations';
 
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
-  styleUrls: ['./landing-page.component.scss']
+  styleUrls: ['./landing-page.component.scss'],
+  animations: [
+    // animation triggers go here
+    trigger('enterComponent', [
+      state('in', style({ transform: 'translateY(0)' })),
+      transition('void => *', [
+        style({ opacity: 0, transform: 'translateY(10px)' }),
+        animate('500ms', style({ opacity: 1, transform: 'translateY(0)' }))
+      ])
+    ])
+  ]
 })
 
 export class LandingPageComponent implements OnInit {
-
-
-  
+  selectedIndexArr = new Array();
+  selectedIndex: any;
   constructor() { }
 
   ngOnInit(): void {
   }
 
   documentList: documentList[] = [
-      {id: 0, name: "Motivationsschreiben", cssClass: "btn green", imgPath: 'assets/icons8-regular-document-64.png'}, 
-      {id: 1, name: "Lebenslauf", cssClass: "btn blue", imgPath: 'assets/icons8-submit-resume-80.png'},    
-      {id: 2, name: "Zwischenzeugniss SDL", cssClass: "btn yellow", imgPath: 'assets/icons8-certificate-64.png'}, 
-      {id: 3, name: "Zeugnisse", cssClass: "btn red", imgPath: 'assets/icons8-certificate-64.png'}, 
+      {id: 0, name: "Motivationsschreiben", imgPath: 'assets/icons8-regular-document-64.png'}, 
+      {id: 1, name: "Lebenslauf", imgPath: 'assets/icons8-submit-resume-80.png'},    
+      {id: 2, name: "Zwischenzeugnis SDL", imgPath: 'assets/icons8-certificate-64.png'}, 
+      {id: 3, name: "Zeugnisse", imgPath: 'assets/icons8-certificate-64.png'}, 
   ]
 
-  fillColor = 'rgb(255, 0, 0)';
-
-  changeColor() {
-    const r = Math.floor(Math.random() * 256);
-    const g = Math.floor(Math.random() * 256);
-    const b = Math.floor(Math.random() * 256);
-    this.fillColor = `rgb(${r}, ${g}, ${b})`;
+  multiSelect(index: number){
+    if (this.isAdd(index) == true) {
+        this.addSelectedItem(index);
+    } 
+    else {
+        this.removeSelectedItem(index);
+    }
   }
 
+  isAdd(index: number){
+    if(this.selectedIndexArr.indexOf(index)  === -1) {
+      return true;
+    }
+    return false;
+  }
 
+  addSelectedItem(index: number){
+    this.selectedIndexArr.push(index); //add
+  }
+
+  removeSelectedItem(index: number){
+    const _index = this.selectedIndexArr.indexOf(index);
+    this.selectedIndexArr.splice(_index, 1); //remove
+  }
 }
 
 interface documentList {
   id: number; 
   name: string; 
-  cssClass: string;
   imgPath: string;
 }
