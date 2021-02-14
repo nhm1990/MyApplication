@@ -5,12 +5,14 @@ import { VerificationCodeComponent } from './verification-code/verification-code
 import { NgOtpInputModule } from 'ng-otp-input';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [LandingPageComponent, VerificationCodeComponent],
   imports: [
     CommonModule,
-    NgOtpInputModule
+    NgOtpInputModule,
+    HttpClientModule
   ],
   exports: [
     LandingPageComponent,

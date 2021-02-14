@@ -7,6 +7,8 @@ import {
   transition,
   // ...
 } from '@angular/animations';
+import { IDocument } from '../document.model';
+import { ApplicationDbServiceService } from '../application-db-service.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -27,17 +29,19 @@ import {
 export class LandingPageComponent implements OnInit {
   selectedIndexArr = new Array();
   selectedIndex: any;
-  constructor() { }
+  documentList: IDocument[] = [];
+  constructor(protected dbService: ApplicationDbServiceService) { }
 
   ngOnInit(): void {
+    this.loadAllDocuments();
   }
 
-  documentList: documentList[] = [
+  /*documentList: IDocument[] = [
       {id: 0, name: "Motivationsschreiben", imgPath: 'assets/icons8-regular-document-64.png'}, 
       {id: 1, name: "Lebenslauf", imgPath: 'assets/icons8-submit-resume-80.png'},    
       {id: 2, name: "Zwischenzeugnis SDL", imgPath: 'assets/icons8-certificate-64.png'}, 
       {id: 3, name: "Zeugnisse", imgPath: 'assets/icons8-certificate-64.png'}, 
-  ]
+  ]*/
 
   multiSelect(index: number){
     if (this.isAdd(index) == true) {
@@ -63,10 +67,12 @@ export class LandingPageComponent implements OnInit {
     const _index = this.selectedIndexArr.indexOf(index);
     this.selectedIndexArr.splice(_index, 1); //remove
   }
-}
 
-interface documentList {
-  id: number; 
-  name: string; 
-  imgPath: string;
+  loadAllDocuments(){
+    this.dbService
+    .get()
+    .then((result: Array<IDocument>) => {
+      this.documentList = result;
+    });
+  }
 }
