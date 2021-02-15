@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IDocument } from './document.model';
+import { IDocument, Document } from './document.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +11,8 @@ export class ApplicationDbServiceService {
   constructor(private http: HttpClient) { }
 
   // Get documents
-  get(): Promise<any> { // get(): Promise<Array<IDocument>> {
-    return this.http.get(this.documentsUrl)
+  getDocuments(myDocument: Object): Promise<any> { // getDocuments(): Promise<Array<IDocument>> {
+    return this.http.post(this.documentsUrl, myDocument)
                     .toPromise()
                     .then(response => response)
                     .catch(this.error);

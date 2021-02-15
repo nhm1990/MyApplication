@@ -33,15 +33,8 @@ export class LandingPageComponent implements OnInit {
   constructor(protected dbService: ApplicationDbServiceService) { }
 
   ngOnInit(): void {
-    this.loadAllDocuments();
+    //this.loadAllDocuments();
   }
-
-  /*documentList: IDocument[] = [
-      {id: 0, name: "Motivationsschreiben", imgPath: 'assets/icons8-regular-document-64.png'}, 
-      {id: 1, name: "Lebenslauf", imgPath: 'assets/icons8-submit-resume-80.png'},    
-      {id: 2, name: "Zwischenzeugnis SDL", imgPath: 'assets/icons8-certificate-64.png'}, 
-      {id: 3, name: "Zeugnisse", imgPath: 'assets/icons8-certificate-64.png'}, 
-  ]*/
 
   multiSelect(index: number){
     if (this.isAdd(index) == true) {
@@ -68,11 +61,10 @@ export class LandingPageComponent implements OnInit {
     this.selectedIndexArr.splice(_index, 1); //remove
   }
 
-  loadAllDocuments(){
-    this.dbService
-    .get()
-    .then((result: Array<IDocument>) => {
-      this.documentList = result;
-    });
-  }
+  /*loadAllDocuments(){
+    this.dbService.getDocuments()
+                  .then((result: Array<IDocument>) => {
+                    this.documentList = result;
+                  });
+  }*/
 }

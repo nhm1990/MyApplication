@@ -3,6 +3,7 @@ var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
 var ObjectID = mongodb.ObjectID;
 var database;
+var db = 'dbMyApplication'
 var dbCollection = "colMyApplication";
 
 // Create new instance of the express server
@@ -47,8 +48,12 @@ app.get("/api/status", function (req, res) {
     res.status(200).json({ status: "UP" });
 });
 
-app.get("/api/documents", function (req, res) {
-    database.collection(dbCollection).find({}).toArray(function (error, data) {
+app.post("/api/documents", function (req, res) {
+    var myDocument = req.body;
+    var queryObject = { verificationCode: myDocument.verificationCode };
+    throw "TEMPTESTNH7347634634 myDocument: " + myDocument.verificationCode;
+
+    database.collection(dbCollection).find(queryObject).toArray(function (error, data) {
         if (error) {
             manageError(res, err.message, "Failed to get documents.");
         } else {
