@@ -1,25 +1,23 @@
-<form>
-    <section class="sectionWrapper">
-        <section>
-            <table [@enterComponent] class="documentTable">
-                <tbody>
-                    <tr *ngFor="let document of documentList; let i = index">
-                        <td>
-                            <button type="button" class="btn" [class.highlight]="selectedIndexArr.indexOf(i) !== -1" (click)="multiSelect(i)">
-                                <div style="text-align: left;">
-                                    <div style="display: inline-block; text-align: center;">
-                                        <img src={{document.imgPath}} height="50" length="50">
-                                        {{ document.name }}
-                                    </div>
-                                </div>
-                            </button> 
-                        </td>   
-                    </tr>
-                    <tr>
-                        <input type="button" value="Download" class="downloadButton">
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-   </section>
-</form>
+<section>
+    <table [@enterComponent] class="documentTable">
+        <tbody>
+            <tr *ngFor="let document of documentList; let i = index">
+                <td>
+                    <button type="button" class="btn" [class.highlight]="selectedIndexArr.indexOf(i) !== -1" (click)="multiSelect(i)">
+                        <div style="text-align: left;">
+                            <div style="display: inline-block; text-align: center;">
+                                <img src={{document.imgPath}} height="50" length="50">
+                                {{ document.name }}
+                            </div>
+                        </div>
+                    </button> 
+                </td>   
+            </tr>
+            <tr>
+                <input type="button" value="Download" class="downloadButton">
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+

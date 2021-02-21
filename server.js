@@ -48,15 +48,17 @@ app.get("/api/status", function (req, res) {
     res.status(200).json({ status: "UP" });
 });
 
-app.post("/api/documents", function (req, res) {
-    var myDocument = req.body;
-    var queryObject = { verificationCode: myDocument.verificationCode };
-    throw "TEMPTESTNH7347634634 myDocument: " + myDocument.verificationCode;
-
+app.get("/api/documents", function (req, res) {
+    console.log("reqbody: " + req.body);
+    var params = req.query.params;
+    console.log("req params: " + params);
+    console.log("req typeof params: " + typeof(params));
+    var queryObject = { verificationCode: params };
     database.collection(dbCollection).find(queryObject).toArray(function (error, data) {
         if (error) {
             manageError(res, err.message, "Failed to get documents.");
         } else {
+            console.log("result data: " + data);
             res.status(200).json(data);
         }
     });

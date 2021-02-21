@@ -3,3 +3,18 @@
 body {
     background-image: url('assets/background-image.jpg');
 }
+
+section {
+    padding: 1em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.hightlight{
+    margin-bottom: 1rem;
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+}

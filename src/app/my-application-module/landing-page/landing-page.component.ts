@@ -1,14 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   trigger,
   state,
   style,
   animate,
-  transition,
-  // ...
+  transition
 } from '@angular/animations';
 import { IDocument } from '../document.model';
-import { ApplicationDbServiceService } from '../application-db-service.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -29,12 +27,12 @@ import { ApplicationDbServiceService } from '../application-db-service.service';
 export class LandingPageComponent implements OnInit {
   selectedIndexArr = new Array();
   selectedIndex: any;
-  documentList: IDocument[] = [];
-  constructor(protected dbService: ApplicationDbServiceService) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    //this.loadAllDocuments();
-  }
+  ngOnInit(): void {  }
+
+  @Input()
+  documentList!: IDocument[];
 
   multiSelect(index: number){
     if (this.isAdd(index) == true) {
@@ -60,11 +58,4 @@ export class LandingPageComponent implements OnInit {
     const _index = this.selectedIndexArr.indexOf(index);
     this.selectedIndexArr.splice(_index, 1); //remove
   }
-
-  /*loadAllDocuments(){
-    this.dbService.getDocuments()
-                  .then((result: Array<IDocument>) => {
-                    this.documentList = result;
-                  });
-  }*/
 }

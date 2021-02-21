@@ -1,0 +1,20 @@
+footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1em;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+}
+
+a {
+    color: black;
+    font-weight: 400;
+}
+
+p {
+    font-weight: 400;
+    cursor: pointer;
+}

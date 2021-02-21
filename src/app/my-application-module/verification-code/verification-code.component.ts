@@ -1,38 +1,61 @@
+import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ApplicationDbServiceService } from '../application-db-service.service';
 import { IDocument, Document } from '../document.model';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 
 @Component({
   selector: 'app-verification-code',
   templateUrl: './verification-code.component.html',
-  styleUrls: ['./verification-code.component.scss']
+  styleUrls: ['./verification-code.component.scss'],
+  animations: [
+    // animation triggers go here
+    trigger('showErrorMessage', [
+      state('in', style({ transform: 'translateY(0)' })),
+      transition('void => *', [
+        style({ opacity: 0, transform: 'translateY(10px)' }),
+        animate('500ms', style({ opacity: 1, transform: 'translateY(0)' }))
+      ])
+    ])
+  ]
 })
 export class VerificationCodeComponent implements OnInit {
 
   isVerified: boolean = false;
+  isFullLength: boolean = false;
+  documentList: IDocument[] = [];
+  
   constructor(protected dbService: ApplicationDbServiceService) { }
 
   ngOnInit(): void {
   }
 
-  onOtpChange(verificationCode: string){
+  async onOtpChange(verificationCode: string){
     if(verificationCode.length == 6){
-      console.log("TEMPTESTNH34636434 event: " + verificationCode);
-      var myDocument = new Document(0, "", "", verificationCode);
-      console.log("TEMPTESTNH34636434 myDocument.verificationCode : " + myDocument.verificationCode);
-
-      this.checkIsValidVerificationCode(myDocument);
+      this.isFullLength = true;
+      this.documentList = await this.getDocumentListWithVerificationCode(verificationCode);
+      if(this.documentList.length > 0){
+        this.isVerified = true;
+      }
+    }
+    else {
+      this.isFullLength = false;
     }
   }
 
-  checkIsValidVerificationCode(myDocument: Object){
-    this.dbService.getDocuments(myDocument)
-                  .then((result: Array<IDocument>) => {
-                    
-                    throw "TEMPTESTNH8734634634 result: " + result;
-                    this.isVerified = true;
+  async getDocumentListWithVerificationCode(verificationCode: string){
+    const params = new HttpParams().set('params', verificationCode);
+    await this.dbService.getDocuments(params)
+                  .then((res: Array<IDocument>) => {
+                        this.documentList = res;
                   });
+    
+    return this.documentList;
   }
-
-
 }
