@@ -1,15 +1,16 @@
-<form>
-    <section class="sectionWrapper">
-        <section>
-            <div *ngIf="!isVerified">
-                <ng-otp-input  (onInputChange)="onOtpChange($event)"  [config]="{length:6, allowNumbersOnly:true}"></ng-otp-input>   
-            </div>
-            <div *ngIf="isVerified">
-                <app-landing-page></app-landing-page>
-            </div>
-        </section>
-    </section>
-</form>
+<section>
+    <div *ngIf="!isVerified">
+        <ng-otp-input  (onInputChange)="onOtpChange($event)"  [config]="{length:6, allowNumbersOnly:true}"></ng-otp-input>
+        <br>
+        <div [@showErrorMessage] *ngIf="isFullLength && !isVerified" class="alert alert-danger">
+            Der eingegebene Verifikationscode <br>
+            ist ungültig
+        </div> 
+    </div>
+    <div *ngIf="isVerified">
+        <app-landing-page [documentList]="documentList"></app-landing-page>
+    </div>
+</section>
 
 
 
