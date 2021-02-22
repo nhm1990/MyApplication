@@ -7,6 +7,7 @@ import { IDocument, Document } from './document.model';
 })
 export class ApplicationDbServiceService {
   private documentsUrl = '/api/documents';
+  private filePathUrl = '/api/files/pdf';
 
   constructor(private http: HttpClient) { }
 
@@ -16,6 +17,15 @@ export class ApplicationDbServiceService {
                     .then(response => response)
                     .catch(this.error);
   }
+
+  async getPdfFileByFilePath(params: HttpParams): Promise<any> { // getDocuments(): Promise<Array<IDocument>> {
+    return this.http.get(this.filePathUrl, {params})
+                    .toPromise()
+                    .then(response => response)
+                    .catch(this.error);
+  }
+
+
   
   private error(error: any) {
     let message = (error.message) ? error.message : error.status ? `${error.status} - ${error.statusText}` : 'Server error';
