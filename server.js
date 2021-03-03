@@ -1,10 +1,9 @@
 var express = require("express");
 var fs = require('fs');
-var bodyParser = require("body-parser");
+var path = require('path');
+var bodyParser = require("body-parser"); //npm install body-parser
 var mongodb = require("mongodb");
-var ObjectID = mongodb.ObjectID;
 var database;
-var db = 'dbMyApplication'
 var dbCollection = "colMyApplication";
 
 // Create new instance of the express server
@@ -25,7 +24,8 @@ const LOCAL_PORT = 8080;
 const uri = 'mongodb+srv://nhormesch:Mo2$mart4Uo@cluster0.qeihn.mongodb.net/dbMyApplication?retryWrites=true&w=majority';
 
 //app.use('/pdf', express.static('');
-app.use(express.static('files'));
+//app.use(express.static('files'));
+app.use('/files', express.static(path.join(__dirname, 'files')))
 
 
 // Init the server
@@ -83,11 +83,3 @@ function manageError(res, reason, message, code) {
     console.log("Error: " + reason);
     res.status(code || 500).json({ "error": message });
 }
-
-function readFile(pathToTheFile, cb){
-    var fs = require('fs');
-    fs.readFile(pathToTheFile, function(err, data){
-       //how to make the file fetched to be downloadable in the client requested
-       //cb(data);
-    }); 
- }

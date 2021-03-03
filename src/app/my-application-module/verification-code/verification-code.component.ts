@@ -9,6 +9,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
+import { saveAs } from 'file-saver'; //npm install file-saver / npm install @types/file-saver --save-dev
 
 @Component({
   selector: 'app-verification-code',
@@ -30,7 +31,8 @@ export class VerificationCodeComponent implements OnInit {
   isVerified: boolean = false;
   isFullLength: boolean = false;
   documentList: IDocument[] = [];
-  
+  testPdf: any;
+
   constructor(protected dbService: ApplicationDbServiceService) { }
 
   ngOnInit(): void {
@@ -42,13 +44,12 @@ export class VerificationCodeComponent implements OnInit {
       this.documentList = await this.getDocumentListWithVerificationCode(verificationCode);
       if(this.documentList.length > 0){
         this.isVerified = true;
-        var filePath = this.documentList[0].filePath;
-        await this.getPdfFileByFilePath(filePath);
-  
+        //var filePath = this.documentList[0].filePath;
       }
     }
     else {
       this.isFullLength = false;
+      this.isVerified = false;
     }
   }
 
@@ -60,13 +61,5 @@ export class VerificationCodeComponent implements OnInit {
                   });
     
     return this.documentList;
-  }
-
-  async getPdfFileByFilePath(filePath: string){
-    const params = new HttpParams().set('params', filePath);
-    await this.dbService.getPdfFileByFilePath(params)
-                  .then((res: Array<IDocument>) => {
-                        this.documentList = res;
-                  });   
   }
 }

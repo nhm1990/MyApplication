@@ -11,7 +11,12 @@
                             </div>
                         </div>
                     </button> 
-                </td>   
+                </td>
+                <td>
+                    <button (click)="download(document.filePath)">
+                        Download
+                    </button>
+                </td>
             </tr>
             <tr>
                 <input type="button" value="Download" class="downloadButton">

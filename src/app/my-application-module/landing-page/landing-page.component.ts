@@ -7,6 +7,8 @@ import {
   transition
 } from '@angular/animations';
 import { IDocument } from '../document.model';
+import { DownloadService } from '../download.service';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-landing-page',
@@ -27,7 +29,7 @@ import { IDocument } from '../document.model';
 export class LandingPageComponent implements OnInit {
   selectedIndexArr = new Array();
   selectedIndex: any;
-  constructor() { }
+  constructor(private downloads: DownloadService ) {}
 
   ngOnInit(): void {  }
 
@@ -58,4 +60,13 @@ export class LandingPageComponent implements OnInit {
     const _index = this.selectedIndexArr.indexOf(index);
     this.selectedIndexArr.splice(_index, 1); //remove
   }
+
+  download(filePath: string){
+    //const params = new HttpParams().set('params', filePath);
+    console.log("TEMPTESTNH734634634 download function invoked.");
+
+    this.downloads
+          .downloadPdfByFilePath('/api/files/pdf/testcompany/motivationsschreiben.pdf')
+          .subscribe(blob => saveAs(blob, 'archive123.zip'))
+  } 
 }
