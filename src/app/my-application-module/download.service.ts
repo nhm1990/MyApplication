@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -6,19 +6,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DownloadService {
-  private filePathUrl = '/api/files/pdf';
+  private filePathApiUrl = '/api/files/pdf';
 
   constructor(private http: HttpClient) {}
-  
-  /*async downloadPdf(params: HttpParams): Promise<Observable<Blob>> { // getDocuments(): Promise<Array<IDocument>> {
-    let headers = new HttpHeaders();
-    headers = headers.set('Accept', 'application/pdf');
-    
 
-    /*return this.http.get<Blob>(this.filePathUrl, { headers: headers, responseType: 'blob' as 'json'});
-  }*/
+  async getFileByFilePath(filePath: string): Promise<Observable<Blob>> {
+    console.log("TEMPTESTNH3643643 filePath: " + filePath);
+    const params = new HttpParams().set('params', filePath);
+    //const headers = new HttpHeaders();
+    //headers.set('Accept', 'application/pdf');
 
-  downloadPdfByFilePath(url: string): Observable<Blob> {
-    return this.http.get(this.filePathUrl, { responseType: 'blob'})
+    return this.http.get(this.filePathApiUrl, {params: params, responseType: 'blob'});
   }
 }
