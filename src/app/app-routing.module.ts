@@ -5,11 +5,11 @@ import { LandingPageComponent } from './my-application-module/landing-page/landi
 import { VerificationCodeComponent } from './my-application-module/verification-code/verification-code.component';
 
 const routes: Routes = [
-  { path: 'imprint', component: ImprintComponent},
-  { path: 'verificationCode', component: VerificationCodeComponent},
-  { path: 'download', component: LandingPageComponent},
-  { path: '**', component: VerificationCodeComponent},
-  { path: '',   redirectTo: '/verificationCode', pathMatch: 'full' }
+  //{ path: 'imprint', component: ImprintComponent},
+  //{ path: 'verificationCode', component: VerificationCodeComponent},
+  //{ path: 'download', component: LandingPageComponent}//,
+  //{ path: '**', component: VerificationCodeComponent}//,
+  //{ path: '',   redirectTo: '/verificationCode', pathMatch: 'full' }
 ];
 
 @NgModule({

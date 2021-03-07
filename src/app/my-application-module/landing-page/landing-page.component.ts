@@ -9,6 +9,8 @@ import {
 import { IDocument } from '../document.model';
 import { DownloadService } from '../download.service';
 import { saveAs } from 'file-saver';
+import * as JSZip from 'jszip';  //npm i jszip 
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-landing-page',
@@ -27,8 +29,7 @@ import { saveAs } from 'file-saver';
 })
 
 export class LandingPageComponent implements OnInit {
-  selectedIndexArr = new Array();
-  selectedIndex: any;
+  selectedFileArr = new Array();
   constructor(private downloads: DownloadService ) {}
 
   ngOnInit(): void {  }
@@ -46,27 +47,37 @@ export class LandingPageComponent implements OnInit {
   }
 
   isAdd(index: number){
-    if(this.selectedIndexArr.indexOf(index)  === -1) {
+    if(this.selectedFileArr.indexOf(index)  === -1) {
       return true;
     }
     return false;
   }
 
   addSelectedItem(index: number){
-    this.selectedIndexArr.push(index); //add
+    this.selectedFileArr.push(index); //add
   }
 
   removeSelectedItem(index: number){
-    const _index = this.selectedIndexArr.indexOf(index);
-    this.selectedIndexArr.splice(_index, 1); //remove
+    const _index = this.selectedFileArr.indexOf(index);
+    this.selectedFileArr.splice(_index, 1); //remove
   }
 
-  download(filePath: string){
-    //const params = new HttpParams().set('params', filePath);
-    console.log("TEMPTESTNH734634634 download function invoked.");
+  async downloadSelected(){    
+    const zip = new JSZip();
+    const name = "Bewerbungsunterlagen Nicolas Hormesch" + '.zip';  
 
-    this.downloads
-          .downloadPdfByFilePath('/api/files/pdf/testcompany/motivationsschreiben.pdf')
-          .subscribe(blob => saveAs(blob, 'archive123.zip'))
-  } 
+    for(var i = 0; i < this.selectedFileArr.length; i++){
+      var index = this.selectedFileArr[i];
+      var document = this.documentList[index];
+      const fileData: any = await this.downloads.getFileByFilePath(document.filePath);
+      const blob: any = new Blob([fileData], { type: 'application/pdf'});
+      zip.file(document.name+'.pdf', blob);    
+    }
+    zip.generateAsync({ type: 'blob' }).then((content) => {  
+      if (content) {  
+        //FileSaver.saveAs(content, name);  
+        saveAs(content, name);
+      }  
+    });
+  }
 }

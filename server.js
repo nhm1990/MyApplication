@@ -27,7 +27,6 @@ const uri = 'mongodb+srv://nhormesch:Mo2$mart4Uo@cluster0.qeihn.mongodb.net/dbMy
 //app.use(express.static('files'));
 app.use('/files', express.static(path.join(__dirname, 'files')))
 
-
 // Init the server
 mongodb.MongoClient.connect(process.env.MONGODB_URI || uri || LOCAL_DATABASE,{useUnifiedTopology: true, useNewUrlParser: true}, 
                             function (error, client){
@@ -48,14 +47,10 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || uri || LOCAL_DATABASE,{us
                                 });
                             });
 
-                            app.get("/api/status", function (req, res) {
-                                res.status(200).json({ status: "UP" });
-                            });
-
 app.get("/api/files/pdf", (req, res) => {
-    //var filePath = req.query.params;
-    var filePath = '/files/pdf/testcompany/motivationsschreiben.pdf';
-    console.log("TEMPTESTNH232424 /api/files/pdf filePath: " + __dirname + filePath);
+    var filePath = req.query.params;
+    //var filePath = '/files/pdf/testcompany/motivationsschreiben.pdf';
+    console.log("TEMPTESTNH232424 NODEJS /api/files/pdf filePath: " + __dirname + filePath);
     fs.readFile(__dirname + filePath , function (err,data){
         res.contentType("application/pdf");
         res.send(data);

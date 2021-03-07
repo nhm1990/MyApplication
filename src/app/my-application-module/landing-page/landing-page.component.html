@@ -1,25 +1,28 @@
 <section>
     <table [@enterComponent] class="documentTable">
+        <thead>
+            Willkommen {{ documentList[0].companyName }}
+        </thead>
         <tbody>
             <tr *ngFor="let document of documentList; let i = index">
                 <td>
-                    <button type="button" class="btn" [class.highlight]="selectedIndexArr.indexOf(i) !== -1" (click)="multiSelect(i)">
+                    <button type="button" class="btn" [class.highlight]="selectedFileArr.indexOf(i) !== -1" (click)="multiSelect(i)">
                         <div style="text-align: left;">
                             <div style="display: inline-block; text-align: center;">
-                                <img src={{document.filePath}} height="50" length="50">
+                                <img src={{document.iconPath}} height="50" length="50">
                                 {{ document.name }}
                             </div>
                         </div>
                     </button> 
                 </td>
                 <td>
-                    <button (click)="download(document.filePath)">
+                    <!--<button (click)="download(document.filePath)">
                         Download
-                    </button>
+                    </button> -->
                 </td>
             </tr>
             <tr>
-                <input type="button" value="Download" class="downloadButton">
+                <input (click)="downloadSelected()" type="button" value="Download" class="downloadButton">
             </tr>
         </tbody>
     </table>

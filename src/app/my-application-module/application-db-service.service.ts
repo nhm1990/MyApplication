@@ -1,16 +1,18 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApplicationDbServiceService {
-  private documentsUrl = '/api/documents';
+  private documentsApiUrl = '/api/documents';
 
   constructor(private http: HttpClient) { }
 
-  async getDocuments(params: HttpParams): Promise<any> { // getDocuments(): Promise<Array<IDocument>> {
-    return this.http.get(this.documentsUrl, {params})
+  async getDocumentListByVerificationCode(verificationCode: string): Promise<any> {
+    const params = new HttpParams().set('params', verificationCode);
+
+    return this.http.get(this.documentsApiUrl, {params})
                     .toPromise()
                     .then(response => response)
                     .catch(this.error);

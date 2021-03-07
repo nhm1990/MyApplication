@@ -1,7 +1,6 @@
-import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ApplicationDbServiceService } from '../application-db-service.service';
-import { IDocument, Document } from '../document.model';
+import { IDocument } from '../document.model';
 import {
   trigger,
   state,
@@ -31,7 +30,8 @@ export class VerificationCodeComponent implements OnInit {
   isVerified: boolean = false;
   isFullLength: boolean = false;
   documentList: IDocument[] = [];
-  testPdf: any;
+  invocationCounter: number = 0;
+  companyName: string = '';
 
   constructor(protected dbService: ApplicationDbServiceService) { }
 
@@ -40,26 +40,42 @@ export class VerificationCodeComponent implements OnInit {
 
   async onOtpChange(verificationCode: string){
     if(verificationCode.length == 6){
+      this.invocationCounter = this.invocationCounter + 1;
       this.isFullLength = true;
-      this.documentList = await this.getDocumentListWithVerificationCode(verificationCode);
-      if(this.documentList.length > 0){
-        this.isVerified = true;
-        //var filePath = this.documentList[0].filePath;
+      if(this.invocationCounter <= 10){ //to prevent thousands of webservice calls
+        this.documentList = await this.getDocumentList(verificationCode);
+        if(this.documentList.length > 0){
+          this.fillDocumentListWithDefaultValues(this.documentList);
+          this.isVerified = true;
+        }
       }
-    }
+    } 
     else {
+      this.invocationCounter = 0;
       this.isFullLength = false;
       this.isVerified = false;
     }
   }
 
-  async getDocumentListWithVerificationCode(verificationCode: string){
-    const params = new HttpParams().set('params', verificationCode);
-    await this.dbService.getDocuments(params)
+  async getDocumentList(verificationCode: string){
+    await this.dbService.getDocumentListByVerificationCode(verificationCode)
                   .then((res: Array<IDocument>) => {
                         this.documentList = res;
                   });
     
     return this.documentList;
+  }
+
+  fillDocumentListWithDefaultValues(documentList: IDocument[]){
+    this.addDefaultValuesToExistingDocument(documentList[0]);
+    documentList.push({id: 1, companyName: documentList[0].companyName, name: "Lebenslauf", filePath: "/files/pdf/Lebenslauf.pdf", iconPath: "../assets/icon_curriculum.png", verificationCode: ""});
+    documentList.push({id: 2, companyName: documentList[0].companyName, name: "Zwischenzeugnis SDL", filePath: "/files/pdf/Zwischenzeugnis_SDL.pdf", iconPath: "../assets/icon_certificate.png", verificationCode: ""});
+    documentList.push({id: 3, companyName: documentList[0].companyName, name: "Zeugnisse", filePath: "/files/pdf/Zeugnisse.pdf", iconPath: "../assets/icon_certificate.png", verificationCode: ""});
+    documentList.push({id: 4, companyName: documentList[0].companyName, name: "Zertifikate", filePath: "/files/pdf/Zertifikate.pdf", iconPath: "../assets/icon_certificate.png", verificationCode: ""});
+  }
+
+  addDefaultValuesToExistingDocument(document: IDocument){
+    document.name = "Motivationsschreiben";
+    document.iconPath = "../assets/icon_letter.png";
   }
 }

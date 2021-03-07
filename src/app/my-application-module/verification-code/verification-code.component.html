@@ -3,9 +3,9 @@
         <ng-otp-input  (onInputChange)="onOtpChange($event)"  [config]="{length:6, allowNumbersOnly:true}"></ng-otp-input>
         <br>
         <div [@showErrorMessage] *ngIf="isFullLength && !isVerified" class="alert alert-danger">
-            Der eingegebene Verifikationscode <br>
-            ist ungültig
-        </div> 
+            <div *ngIf="invocationCounter <= 10">Der eingegebene Verifikationscode <br> ist ungültig </div>
+            <div *ngIf="invocationCounter > 10">Bitte mache nicht so viele Abfragen! <br> Das mag der Server nicht </div>
+        </div>
     </div>
     <div *ngIf="isVerified">
         <app-landing-page [documentList]="documentList"></app-landing-page>
