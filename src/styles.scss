@@ -13,8 +13,28 @@ section {
     transform: translate(-50%, -50%);
 }
 
-.hightlight{
-    margin-bottom: 1rem;
-    background-color: #f8f9fa;
-    padding: 1.5rem;
+td {
+    border-bottom-style: inset;
+    width: 100%;
+    padding: 15px;
+    cursor: pointer;
 }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.trElements{
+    :hover {
+        background: rgba(86, 128, 77, 0.562)
+    }
+}
+
+input[type='checkbox']{
+    height: 15px;
+    width: 15px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
