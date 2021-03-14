@@ -7,10 +7,10 @@
             <div *ngIf="invocationCounter > 10">Bitte mache nicht so viele Abfragen! <br> Das mag der Server nicht </div>
         </div>
     </div>
-    <div *ngIf="isVerified">
-        <app-landing-page [documentList]="documentList"></app-landing-page>
-    </div>
 </section>
 
+<div *ngIf="isVerified">
+    <app-landing-page [documentList]="documentList"></app-landing-page>
+</div>
 
 

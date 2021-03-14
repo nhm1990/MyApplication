@@ -24,12 +24,20 @@ import * as FileSaver from 'file-saver';
         style({ opacity: 0, transform: 'translateY(10px)' }),
         animate('500ms', style({ opacity: 1, transform: 'translateY(0)' }))
       ])
+    ]),
+    trigger('showErrorMessage', [
+      state('in', style({ transform: 'translateY(0)' })),
+      transition('void => *', [
+        style({ opacity: 0, transform: 'translateY(10px)' }),
+        animate('500ms', style({ opacity: 1, transform: 'translateY(0)' }))
+      ])
     ])
   ]
 })
 
 export class LandingPageComponent implements OnInit {
   selectedFileArr = new Array();
+  isNoSelection: boolean = false;
   constructor(private downloads: DownloadService ) {}
 
   ngOnInit(): void {  }
@@ -38,6 +46,7 @@ export class LandingPageComponent implements OnInit {
   documentList!: IDocument[];
 
   multiSelect(index: number){
+    this.isNoSelection = false;
     if (this.isAdd(index) == true) {
         this.addSelectedItem(index);
     } 
@@ -62,7 +71,12 @@ export class LandingPageComponent implements OnInit {
     this.selectedFileArr.splice(_index, 1); //remove
   }
 
-  async downloadSelected(){    
+  async downloadSelected(){  
+    var isValid = this.validateSelection();
+    if(isValid == false){
+      return;
+    }
+
     const zip = new JSZip();
     const name = "Bewerbungsunterlagen Nicolas Hormesch" + '.zip';  
 
@@ -79,5 +93,14 @@ export class LandingPageComponent implements OnInit {
         saveAs(content, name);
       }  
     });
+  }
+
+  validateSelection(){
+    if(this.selectedFileArr.length == 0){
+      this.isNoSelection = true;
+      return false;
+    }
+    this.isNoSelection = false;
+    return true;
   }
 }
