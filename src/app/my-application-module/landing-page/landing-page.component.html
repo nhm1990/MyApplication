@@ -4,7 +4,7 @@
             <strong>Willkommen {{ documentList[0].companyName }}</strong><br><br>
         </thead>
         <tbody>
-            <tr *ngFor="let document of documentList; let i = index" class="trElements">
+            <tr *ngFor="let document of documentList; let i = index">
                 <td (click)="multiSelect(i)">
                     <!--<button type="button" class="btn" [class.highlight]="selectedFileArr.indexOf(i) !== -1" (click)="multiSelect(i)">
                         <div style="text-align: left;">
@@ -13,18 +13,19 @@
                                 {{ document.name }}
                             </div>
                         </div>
-                    </button> -->
+                    </button> 
                     <input type="checkbox" [checked]="selectedFileArr.indexOf(i) !== -1">
-                    {{ document.name }}
+                    {{ document.name }} -->
+
+                    <input type="checkbox" id="box-{{i}}">
+                    <label for="box-{{i}}">{{ document.name }}</label>
                 </td>
             </tr>
             <br>
             <tr>
-                <input (click)="downloadSelected()" type="button" value="Download" class="downloadButton" required validationMessage="Please select movie">
+                <input (click)="downloadSelected()" type="button" value="Download" class="downloadButton">
                 <div [@showErrorMessage] *ngIf="isNoSelection" class="alert alert-danger">Bitte selektieren Sie <br> mindestens ein Element</div>
             </tr>
         </tbody>
     </table>
 </section>
-
-

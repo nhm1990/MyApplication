@@ -8,7 +8,6 @@ import {
 } from '@angular/animations';
 import { IDocument } from '../document.model';
 import { DownloadService } from '../download.service';
-import { saveAs } from 'file-saver';
 import * as JSZip from 'jszip';  //npm i jszip 
 import * as FileSaver from 'file-saver';
 
@@ -47,6 +46,7 @@ export class LandingPageComponent implements OnInit {
 
   multiSelect(index: number){
     this.isNoSelection = false;
+    console.log("TEMPTESTNH634634634 this.selectedFileArr: " + this.selectedFileArr);
     if (this.isAdd(index) == true) {
         this.addSelectedItem(index);
     } 
@@ -63,12 +63,12 @@ export class LandingPageComponent implements OnInit {
   }
 
   addSelectedItem(index: number){
-    this.selectedFileArr.push(index); //add
+    this.selectedFileArr.push(index);
   }
 
   removeSelectedItem(index: number){
     const _index = this.selectedFileArr.indexOf(index);
-    this.selectedFileArr.splice(_index, 1); //remove
+    this.selectedFileArr.splice(_index, 1);
   }
 
   async downloadSelected(){  
@@ -90,7 +90,7 @@ export class LandingPageComponent implements OnInit {
     zip.generateAsync({ type: 'blob' }).then((content) => {  
       if (content) {  
         //FileSaver.saveAs(content, name);  
-        saveAs(content, name);
+        FileSaver.saveAs(content, name);
       }  
     });
   }

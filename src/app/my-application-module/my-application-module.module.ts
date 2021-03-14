@@ -6,13 +6,15 @@ import { NgOtpInputModule } from 'ng-otp-input';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { MatCheckboxModule } from '@angular/material/checkbox'; 
 
 @NgModule({
   declarations: [LandingPageComponent, VerificationCodeComponent],
   imports: [
     CommonModule,
     NgOtpInputModule,
-    HttpClientModule
+    HttpClientModule,
+    MatCheckboxModule
   ],
   exports: [
     LandingPageComponent,
