@@ -5,19 +5,8 @@
         </thead>
         <tbody>
             <tr *ngFor="let document of documentList; let i = index">
-                <td (click)="multiSelect(i)">
-                    <!--<button type="button" class="btn" [class.highlight]="selectedFileArr.indexOf(i) !== -1" (click)="multiSelect(i)">
-                        <div style="text-align: left;">
-                            <div style="display: inline-block; text-align: center;">
-                                <img src={{document.iconPath}} height="50" length="50">
-                                {{ document.name }}
-                            </div>
-                        </div>
-                    </button> 
-                    <input type="checkbox" [checked]="selectedFileArr.indexOf(i) !== -1">
-                    {{ document.name }} -->
-
-                    <input type="checkbox" id="box-{{i}}">
+                <td>
+                    <input type="checkbox" id="box-{{i}}" (click)="multiSelect(i)">
                     <label for="box-{{i}}">{{ document.name }}</label>
                 </td>
             </tr>
