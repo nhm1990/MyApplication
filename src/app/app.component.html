@@ -1,7 +1,7 @@
 
-<div class="app-body" (window:resize)="onResize()">
+<div (window:resize)="onResize()">
     <router-outlet></router-outlet>
     <app-verification-code></app-verification-code>
-    <app-footer></app-footer>
+    <app-footer [isMobile]="isMobile"></app-footer>
 </div>
 

@@ -1,20 +1,20 @@
 <footer>
-    <div class="lead mb-0">
+    <div>
         <a href="https://www.xing.com/profile/Nicolas_Hormesch" target="_blank"><img src='./assets/xing_icon.svg' height="50" length="50"></a>
-        <a href="https://www.xing.com/profile/Nicolas_Hormesch" target="_blank">Nicolas Hormesch</a>
+        <a *ngIf="!isMobile" href="https://www.xing.com/profile/Nicolas_Hormesch" target="_blank">Nicolas Hormesch</a>
     </div>
-    <div class="lead mb-0">
+    <div>
         <a href="https://github.com/nhm1990/MyApplication" target="_blank"><img src='./assets/Github_icon.svg' height="50" length="50"></a>
-        <a href="https://github.com/nhm1990/MyApplication" target="_blank">https://github.com/nhm1990/MyApplication</a>
+        <a *ngIf="!isMobile" href="https://github.com/nhm1990/MyApplication" target="_blank">https://github.com/nhm1990/MyApplication</a>
     </div>
-    <div class="lead mb-0">
+    <div>
         <!-- <a routerLink="/imprint" routerLinkActive="active"><img src='./assets/imprint_icon.png' height="40" length="50"></a>
         <a routerLink="/imprint" routerLinkActive="active">Impressum</a>-->
         <p (click)="showHideImprint()">
             <img src='./assets/imprint_icon.svg' height="50" length="50">
-             Impressum
+             <a *ngIf="!isMobile"> Impressum</a>
         </p> 
     </div>
 </footer>
 
-<app-imprint *ngIf="isImprint"></app-imprint>
+<app-imprint *ngIf="isImprint && !isMobile"></app-imprint>

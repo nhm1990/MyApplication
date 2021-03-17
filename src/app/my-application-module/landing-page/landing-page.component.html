@@ -1,20 +1,16 @@
 <section>
-    <table [@enterComponent]>
-        <thead>
-            <strong>Willkommen {{ documentList[0].companyName }}</strong><br><br>
-        </thead>
-        <tbody>
-            <tr *ngFor="let document of documentList; let i = index">
+    <div  [@enterComponent]>
+        <strong>Willkommen {{ documentList[0].companyName }}</strong><br><br>
+        <ul *ngFor="let document of documentList; let i = index" >
+            <li>
                 <td>
                     <input type="checkbox" id="box-{{i}}" (click)="multiSelect(i)">
                     <label for="box-{{i}}">{{ document.name }}</label>
                 </td>
-            </tr>
-            <br>
-            <tr>
-                <input (click)="downloadSelected()" type="button" value="Download" class="downloadButton">
-                <div [@showErrorMessage] *ngIf="isNoSelection" class="alert alert-danger">Bitte selektieren Sie <br> mindestens ein Element</div>
-            </tr>
-        </tbody>
-    </table>
+            </li>
+        </ul>
+        <input (click)="downloadSelected()" type="button" value="Download" class="downloadButton">
+        <div [@showErrorMessage] *ngIf="isNoSelection" class="alert alert-danger">Bitte selektieren Sie mindestens <br> ein Element</div>
+    </div>
 </section>
+

@@ -8,19 +8,21 @@ import { ResponsiveService } from './responsive.service';
 })
 export class AppComponent {
   title = 'MyApplication';
-  event1: CustomEvent | undefined;
-  
+  isMobile: boolean = false;
+
   constructor(private responsiveService:ResponsiveService){
   }
 
   ngOnInit(){
     this.responsiveService.getMobileStatus().subscribe( isMobile =>{
       if(isMobile){
-        console.log('Mobile device detected')
+        console.log('Mobile device detected');
+
       }
       else{
         console.log('Desktop detected')
       }
+      this.isMobile = isMobile;
     });
     this.onResize();    
   }

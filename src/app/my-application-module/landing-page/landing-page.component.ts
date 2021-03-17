@@ -16,7 +16,6 @@ import * as FileSaver from 'file-saver';
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.scss'],
   animations: [
-    // animation triggers go here
     trigger('enterComponent', [
       state('in', style({ transform: 'translateY(0)' })),
       transition('void => *', [
@@ -46,7 +45,6 @@ export class LandingPageComponent implements OnInit {
 
   multiSelect(index: number){
     this.isNoSelection = false;
-    console.log("TEMPTESTNH634634634 this.selectedFileArr: " + this.selectedFileArr);
     if (this.isAdd(index) == true) {
         this.addSelectedItem(index);
     } 
