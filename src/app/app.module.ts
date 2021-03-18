@@ -7,13 +7,15 @@ import { NgOtpInputModule } from 'ng-otp-input';
 import { FooterComponent } from './footer/footer.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { ImprintComponent } from './imprint/imprint.component'; //npm install @angular/cdk
-import { MatCardModule } from '@angular/material/card'; //npm install @angular/material 
+import { MatCardModule } from '@angular/material/card';
+import { NavbarComponent } from './navbar/navbar.component'; //npm install @angular/material 
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
-    ImprintComponent
+    ImprintComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
