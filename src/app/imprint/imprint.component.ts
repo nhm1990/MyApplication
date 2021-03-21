@@ -1,5 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-imprint',
@@ -16,10 +17,23 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class ImprintComponent implements OnInit {
+  isMobile!: boolean;
+  positionClass: string = "right-center";
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-  }
+    this.route.queryParams.subscribe(params => {
+      this.isMobile = params['isMobile'];
+    });
 
+    if(this.isMobile){
+      this.positionClass = "center";
+    }
+    else {
+      this.positionClass = "right-center";
+    }
+  }
 }

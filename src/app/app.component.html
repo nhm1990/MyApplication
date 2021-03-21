@@ -1,6 +1,6 @@
 
 <div (window:resize)="onResize()">
-    <app-navbar *ngIf="isMobile"></app-navbar>
+    <app-navbar *ngIf="isMobile" [isMobile]="isMobile"></app-navbar>
     <router-outlet></router-outlet>
     <app-footer [isMobile]="isMobile"></app-footer>
 </div>

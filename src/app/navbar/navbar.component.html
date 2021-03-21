@@ -1,7 +1,6 @@
-
 <nav>
     <ul>
         <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
-        <li><a routerLink="/imprint" routerLinkActive="active">Impressum</a></li>
+        <li><a routerLink="/imprint" [queryParams]="{ isMobile: isMobile }">Impressum</a></li>
     </ul>
 </nav>

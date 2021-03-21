@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ImprintComponent } from './imprint/imprint.component';
-import { LandingPageComponent } from './my-application-module/landing-page/landing-page.component';
 import { VerificationCodeComponent } from './my-application-module/verification-code/verification-code.component';
 
 const routes: Routes = [
