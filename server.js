@@ -4,7 +4,10 @@ var path = require('path');
 var bodyParser = require("body-parser"); //npm install body-parser
 var mongodb = require("mongodb");
 var database;
-var dbCollection = "colMyApplication";
+const dotenv = require('dotenv');  //npm install dotenv
+dotenv.config();
+connectionPropertiesProd = getConnectionPropertiesProd();
+connectionPropertiesLocal = getConnectionPropertiesLocal();
 
 // Create new instance of the express server
 var app = express();
@@ -28,7 +31,7 @@ const uri = 'mongodb+srv://nhormesch:Mo2$mart4Uo@cluster0.qeihn.mongodb.net/dbMy
 app.use('/files', express.static(path.join(__dirname, 'files')))
 
 // Init the server
-mongodb.MongoClient.connect(process.env.MONGODB_URI || uri || LOCAL_DATABASE,{useUnifiedTopology: true, useNewUrlParser: true}, 
+mongodb.MongoClient.connect(MONGODB_URI || uri || LOCAL_DATABASE,{useUnifiedTopology: true, useNewUrlParser: true}, 
                             function (error, client){
                                 // Check if there are any problems with the connection to MongoDB database.
                                 if (error) {
@@ -64,7 +67,7 @@ app.get("/api/status", function (req, res) {
 app.get("/api/documents", function (req, res) {
     var params = req.query.params;
     var queryObject = { verificationCode: params };
-    database.collection(dbCollection).find(queryObject).toArray(function (error, data) {
+    database.collection("colMyApplication").find(queryObject).toArray(function (error, data) {
         if (error) {
             manageError(res, err.message, "Failed to get documents.");
         } else {
@@ -78,3 +81,24 @@ function manageError(res, reason, message, code) {
     console.log("Error: " + reason);
     res.status(code || 500).json({ "error": message });
 }
+
+function getConnectionPropertiesProd(){
+  const connectionPropertiesProd = {
+    uri: process.env.MONGODB_URI_PROD,
+    port: process.env.MONGODB_PORT_PROD,
+  }
+  
+  return connectionPropertiesProd;
+}
+
+function getConnectionPropertiesLocal(){
+  const connectionPropertiesLocal = {
+  uri: process.env.MONGODB_URI_LOCAL,
+  port: process.env.MONGODB_PORT_LOCAL,
+  }
+  
+  return connectionPropertiesLocal;
+}
+
+
+
