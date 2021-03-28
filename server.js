@@ -4,10 +4,8 @@ var path = require('path');
 var bodyParser = require("body-parser"); //npm install body-parser
 var mongodb = require("mongodb");
 var database;
-const dotenv = require('dotenv');  //npm install dotenv
-dotenv.config();
-connectionPropertiesProd = getConnectionPropertiesProd();
-connectionPropertiesLocal = getConnectionPropertiesLocal();
+const dotenv = require('dotenv').config();  //npm install dotenv
+const connectionProperties = getConnectionProperties();
 
 // Create new instance of the express server
 var app = express();
@@ -22,16 +20,13 @@ app.use(bodyParser.json());
 // under the `dist` folder.
 var distDir = __dirname + "/dist/";
 app.use(express.static(distDir));
-const LOCAL_DATABASE = "mongodb://localhost:27017/app";
-const LOCAL_PORT = 8080;
-const uri = 'mongodb+srv://nhormesch:Mo2$mart4Uo@cluster0.qeihn.mongodb.net/dbMyApplication?retryWrites=true&w=majority';
 
 //app.use('/pdf', express.static('');
 //app.use(express.static('files'));
 app.use('/files', express.static(path.join(__dirname, 'files')))
 
 // Init the server
-mongodb.MongoClient.connect(MONGODB_URI || uri || LOCAL_DATABASE,{useUnifiedTopology: true, useNewUrlParser: true}, 
+mongodb.MongoClient.connect(connectionProperties.uri || connectionProperties.uriLocal,{useUnifiedTopology: true, useNewUrlParser: true}, 
                             function (error, client){
                                 // Check if there are any problems with the connection to MongoDB database.
                                 if (error) {
@@ -44,7 +39,7 @@ mongodb.MongoClient.connect(MONGODB_URI || uri || LOCAL_DATABASE,{useUnifiedTopo
                                 console.log("Database connection done.");
 
                                 // Initialize the app.
-                                var server = app.listen(process.env.PORT || LOCAL_PORT, function () {
+                                var server = app.listen(connectionProperties.port || connectionProperties.portLocal, function () {
                                     var port = server.address().port;
                                     console.log("App now running on port", port);
                                 });
@@ -82,22 +77,15 @@ function manageError(res, reason, message, code) {
     res.status(code || 500).json({ "error": message });
 }
 
-function getConnectionPropertiesProd(){
-  const connectionPropertiesProd = {
+function getConnectionProperties(){
+  const connectionProperties = {
     uri: process.env.MONGODB_URI_PROD,
     port: process.env.MONGODB_PORT_PROD,
+    uriLocal: process.env.MONGODB_URI_LOCAL,
+    portLocal: process.env.MONGODB_PORT_LOCAL
   }
   
-  return connectionPropertiesProd;
-}
-
-function getConnectionPropertiesLocal(){
-  const connectionPropertiesLocal = {
-  uri: process.env.MONGODB_URI_LOCAL,
-  port: process.env.MONGODB_PORT_LOCAL,
-  }
-  
-  return connectionPropertiesLocal;
+  return connectionProperties;
 }
 
 
