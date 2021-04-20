@@ -1,12 +1,7 @@
 var express = require("express");
 var fs = require('fs');
 var path = require('path');
-<<<<<<< HEAD
 const dotenv = require('dotenv').config();
-=======
-var bodyParser = require("body-parser"); //npm install body-parser
-const dotenv = require('dotenv').config();  //npm install dotenv
->>>>>>> 0cd0ce6e52b2a2fe10cb2f85a76f9701394b467d
 var mongodb = require("mongodb");
 var database;
 
@@ -14,27 +9,9 @@ var database;
 var app = express();
 
 // Define the JSON parser as a default way 
-<<<<<<< HEAD
 // to consume and produce data through the exposed APIs
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-=======
-// to consume and produce data through the 
-// exposed APIs
-//app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-// Create link to Angular build directory
-// The `ng build` command will save the result
-// under the `dist` folder.
-var distDir = __dirname + "/dist/";
-app.use(express.static(distDir));
-
-//app.use('/pdf', express.static('');
-//app.use(express.static('files'));
-app.use('/files', express.static(path.join(__dirname, 'files')))
->>>>>>> 0cd0ce6e52b2a2fe10cb2f85a76f9701394b467d
 
 // Init the server
 mongodb.MongoClient.connect(process.env.MONGODB_URI_PROD,{useUnifiedTopology: true, useNewUrlParser: true}, 
@@ -85,9 +62,3 @@ function manageError(res, reason, message, code) {
     console.log("Error: " + reason);
     res.status(code || 500).json({ "error": message });
 }
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> 0cd0ce6e52b2a2fe10cb2f85a76f9701394b467d
