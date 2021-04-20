@@ -13,6 +13,7 @@ var app = express();
 // Define the JSON parser as a default way 
 // to consume and produce data through the 
 // exposed APIs
+app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 
 // Create link to Angular build directory
