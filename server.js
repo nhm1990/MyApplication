@@ -5,7 +5,6 @@ var bodyParser = require("body-parser"); //npm install body-parser
 const dotenv = require('dotenv').config();  //npm install dotenv
 var mongodb = require("mongodb");
 var database;
-const connectionProperties = getConnectionProperties();
 
 // Create new instance of the express server
 var app = express();
@@ -28,7 +27,7 @@ app.use(express.static(distDir));
 app.use('/files', express.static(path.join(__dirname, 'files')))
 
 // Init the server
-mongodb.MongoClient.connect(connectionProperties.uri,{useUnifiedTopology: true, useNewUrlParser: true}, 
+mongodb.MongoClient.connect(process.env.MONGODB_URI_PROD,{useUnifiedTopology: true, useNewUrlParser: true}, 
                             function (error, client){
                                 // Check if there are any problems with the connection to MongoDB database.
                                 if (error) {
@@ -41,7 +40,7 @@ mongodb.MongoClient.connect(connectionProperties.uri,{useUnifiedTopology: true, 
                                 console.log("Database connection done.");
 
                                 // Initialize the app.
-                                var server = app.listen(connectionProperties.portLocal || connectionProperties.port, function () {
+                                var server = app.listen(8080 || process.env.MONGODB_PORT_PROD, function () {
                                     var port = server.address().port;
                                     console.log("App now running on port", port);
                                 });
@@ -75,15 +74,4 @@ app.get("/api/documents", function (req, res) {
 function manageError(res, reason, message, code) {
     console.log("Error: " + reason);
     res.status(code || 500).json({ "error": message });
-}
-
-function getConnectionProperties(){
-  const connectionProperties = {
-    uri: process.env.MONGODB_URI_PROD,
-    port: process.env.MONGODB_PORT_PROD,
-    uriLocal: process.env.MONGODB_URI_LOCAL,
-    portLocal: process.env.MONGODB_PORT_LOCAL
-  }
-  
-  return connectionProperties;
 }
