@@ -8,7 +8,7 @@ import {
 } from '@angular/animations';
 import { IDocument } from '../document.model';
 import { DownloadService } from '../download.service';
-import * as JSZip from 'jszip';  //npm i jszip 
+import * as JSZip from 'jszip';
 import * as FileSaver from 'file-saver';
 
 @Component({
@@ -76,7 +76,7 @@ export class LandingPageComponent implements OnInit {
     }
 
     const zip = new JSZip();
-    const name = "Bewerbungsunterlagen Nicolas Hormesch" + '.zip';  
+    const name = "Bewerbungsunterlagen Nicolas Hormesch.zip";  
 
     for(var i = 0; i < this.selectedFileArr.length; i++){
       var index = this.selectedFileArr[i];
@@ -87,7 +87,6 @@ export class LandingPageComponent implements OnInit {
     }
     zip.generateAsync({ type: 'blob' }).then((content) => {  
       if (content) {  
-        //FileSaver.saveAs(content, name);  
         FileSaver.saveAs(content, name);
       }  
     });
