@@ -8,7 +8,6 @@ import {
   animate,
   transition
 } from '@angular/animations';
-import { saveAs } from 'file-saver'; //npm install file-saver / npm install @types/file-saver --save-dev
 
 @Component({
   selector: 'app-verification-code',
