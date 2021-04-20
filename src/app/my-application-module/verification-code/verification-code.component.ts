@@ -68,14 +68,13 @@ export class VerificationCodeComponent implements OnInit {
 
   fillDocumentListWithDefaultValues(documentList: IDocument[]){
     this.addDefaultValuesToExistingDocument(documentList[0]);
-    documentList.push({id: 1, companyName: documentList[0].companyName, name: "Lebenslauf", filePath: "/files/pdf/Lebenslauf.pdf", iconPath: "../assets/icon_curriculum.png", verificationCode: ""});
-    documentList.push({id: 2, companyName: documentList[0].companyName, name: "Zwischenzeugnis SDL", filePath: "/files/pdf/Zwischenzeugnis_SDL.pdf", iconPath: "../assets/icon_certificate.png", verificationCode: ""});
-    documentList.push({id: 3, companyName: documentList[0].companyName, name: "Zeugnisse", filePath: "/files/pdf/Zeugnisse.pdf", iconPath: "../assets/icon_certificate.png", verificationCode: ""});
-    documentList.push({id: 4, companyName: documentList[0].companyName, name: "Zertifikate", filePath: "/files/pdf/Zertifikate.pdf", iconPath: "../assets/icon_certificate.png", verificationCode: ""});
+    documentList.push({id: 1, companyName: documentList[0].companyName, name: "Lebenslauf", filePath: "/files/pdf/Lebenslauf.pdf", verificationCode: ""});
+    documentList.push({id: 2, companyName: documentList[0].companyName, name: "Zwischenzeugnis SDL", filePath: "/files/pdf/Zwischenzeugnis_SDL.pdf", verificationCode: ""});
+    documentList.push({id: 3, companyName: documentList[0].companyName, name: "Zeugnisse", filePath: "/files/pdf/Zeugnisse.pdf", verificationCode: ""});
+    documentList.push({id: 4, companyName: documentList[0].companyName, name: "Zertifikate", filePath: "/files/pdf/Zertifikate.pdf", verificationCode: ""});
   }
 
   addDefaultValuesToExistingDocument(document: IDocument){
     document.name = "Motivationsschreiben";
-    document.iconPath = "../assets/icon_letter.png";
   }
 }

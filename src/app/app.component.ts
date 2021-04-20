@@ -16,11 +16,10 @@ export class AppComponent {
   ngOnInit(){
     this.responsiveService.getMobileStatus().subscribe( isMobile =>{
       if(isMobile){
-        console.log('Mobile device detected');
-
+        //console.log('Mobile device detected');
       }
       else{
-        console.log('Desktop detected')
+        //console.log('Desktop detected')
       }
       this.isMobile = isMobile;
     });

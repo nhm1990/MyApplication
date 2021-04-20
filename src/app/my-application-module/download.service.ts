@@ -10,7 +10,6 @@ export class DownloadService {
   constructor(private http: HttpClient) {}
 
   async getFileByFilePath(filePath: string): Promise<any> {
-    console.log("TEMPTESTNH3643643 filePath: " + filePath);
     const params = new HttpParams().set('params', filePath);
     const headers = new HttpHeaders();
     headers.set('Accept', 'application/pdf');
