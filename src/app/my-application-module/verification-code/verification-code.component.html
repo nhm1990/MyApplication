@@ -1,10 +1,10 @@
 <section>
     <div *ngIf="!isVerified">
-        <ng-otp-input  (onInputChange)="onOtpChange($event)"  [config]="{length:6, allowNumbersOnly:true}"></ng-otp-input>
+        <div class="center"><ng-otp-input  (onInputChange)="onOtpChange($event)"  [config]="{length:6, allowNumbersOnly:true}"></ng-otp-input></div>
         <br>
         <div [@showErrorMessage] *ngIf="isFullLength && !isVerified" class="alert alert-danger">
-            <div *ngIf="invocationCounter <= 10">Der eingegebene Verifikationscode <br> ist ungültig </div>
-            <div *ngIf="invocationCounter > 10">Bitte mache nicht so viele Abfragen! <br> Das mag der Server nicht </div>
+            <div [ngClass]="validationClass" *ngIf="invocationCounter <= 10">Der eingegebene Verifikationscode <br> ist ungültig </div>
+            <div [ngClass]="validationClass" *ngIf="invocationCounter > 10">Bitte mache nicht so viele Abfragen! <br> Das mag der Server nicht </div>
         </div>
     </div>
 </section>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { ApplicationDbServiceService } from '../application-db-service.service';
 import { IDocument } from '../document.model';
 import {
@@ -8,6 +8,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
+import { ResponsiveService } from 'src/app/responsive.service';
 
 @Component({
   selector: 'app-verification-code',
@@ -31,8 +32,12 @@ export class VerificationCodeComponent implements OnInit {
   documentList: IDocument[] = [];
   invocationCounter: number = 0;
   companyName: string = '';
+  validationClass: string = "";
 
   constructor(protected dbService: ApplicationDbServiceService) { }
+
+  @Input()
+  isMobile!: boolean;
 
   ngOnInit(): void {
   }

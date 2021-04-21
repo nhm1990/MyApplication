@@ -7,13 +7,11 @@
         <a href="https://github.com/nhm1990/MyApplication" target="_blank"><img src='./assets/Github_icon.svg' height="50" length="50"></a>
         <a *ngIf="!isMobile" href="https://github.com/nhm1990/MyApplication" target="_blank">https://github.com/nhm1990/MyApplication</a>
     </div>
-    <div>
-        <!-- <a routerLink="/imprint" routerLinkActive="active"><img src='./assets/imprint_icon.png' height="40" length="50"></a>
-        <a routerLink="/imprint" routerLinkActive="active">Impressum</a>-->
-        <p (click)="showHideImprint()">
+    <div *ngIf="!isMobile">
+        <div (click)="showHideImprint()">
             <img src='./assets/imprint_icon.svg' height="50" length="50">
-             <a *ngIf="!isMobile"> Impressum</a>
-        </p> 
+            <a> Impressum</a>
+        </div>
     </div>
 </footer>
 
