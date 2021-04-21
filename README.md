@@ -7,6 +7,13 @@ The application was created with the mobile first approach.
 
 ## Technology Stack
 
+For my project I chose the MEAN stack. It is a full-stack, JavaScript-based framework for developing web applications. MEAN stands for..
+
+    ..MongoDB - document database
+    ..Express(.js) - Node.js web framework
+    ..Angular(.js) - a client-side JavaScript framework
+    ..Node(.js) - the premier JavaScript web server
+
 ![Image of MEAN](https://webassets.mongodb.com/_com_assets/cms/mean-stack-0qy07j83ah.png)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.6.
