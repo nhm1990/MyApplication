@@ -7,7 +7,8 @@ The application was created with the mobile first approach.
 
 ## Technology Stack
 
-For my project I chose the MEAN stack. It is a full-stack, JavaScript-based framework for developing web applications. MEAN stands for..
+For my project I chose the MEAN stack. It is a full-stack, JavaScript-based framework for developing web applications. <br>
+MEAN stands for..
 
     ..MongoDB - document database
     ..Express(.js) - Node.js web framework
