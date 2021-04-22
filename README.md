@@ -37,6 +37,8 @@ See quick start guide: https://docs.atlas.mongodb.com/getting-started/
 3.1 MONGODB_URI_PROD="Example URI" <br>
 3.2 MONGODB_PORT_PROD="Example Port" <br>
 
+4. Create folder files\pdf\ and insert documents
+
 The local environment should now run with "node server.js" and "ng serve" commands.
 
 ## Usage of production system
