@@ -44,10 +44,9 @@ The local environment should now run with "node server.js" and "ng serve" comman
 ## Usage of production system
 
 1. Go to www.nicolashormesch.de
-2. Accept the risk of an unknown ssl certificate
-3. Type in the provided verification code
-4. Select the downloadable files
-5. Click on download
+2. Type in the provided verification code
+3. Select the downloadable files
+4. Click on download
 
 ## Licence
 
